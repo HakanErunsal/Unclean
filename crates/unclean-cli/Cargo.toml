@@ -1,0 +1,28 @@
+[package]
+name = "unclean-cli"
+description = "Console frontend for Unclean."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+publish = false
+
+[[bin]]
+name = "unclean"
+path = "src/main.rs"
+
+[dependencies]
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+unclean-core.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tempfile.workspace = true
+unclean-gui = { version = "0.1.0-alpha.1", path = "../unclean-gui" }
+
+[lints]
+workspace = true

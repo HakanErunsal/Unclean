@@ -1,0 +1,6 @@
+{
+    "FileVersion": 3,
+    "FriendlyName": "Invented Trailing Comma",
+    "Description": "Synthetic descriptor with a trailing comma.",
+    "EnabledByDefault": false,
+}

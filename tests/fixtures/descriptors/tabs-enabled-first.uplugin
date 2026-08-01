@@ -1,0 +1,7 @@
+{
+	"EnabledByDefault": true,
+	"FileVersion": 3,
+	"FriendlyName": "Invented Tabs",
+	"Description": "Synthetic descriptor indented with tabs.",
+	"Modules": []
+}

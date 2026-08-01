@@ -1,0 +1,91 @@
+schema = 1
+
+[[case]]
+name = "normal-unset"
+path = "normal-unset.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "unspecified"
+expected_result = "parse"
+
+[[case]]
+name = "trailing-comma-disabled"
+path = "trailing-comma-disabled.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "disabled"
+expected_result = "parse"
+
+[[case]]
+name = "compact-enabled-last"
+path = "compact-enabled-last.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "enabled"
+expected_result = "parse"
+
+[[case]]
+name = "tabs-enabled-first"
+path = "tabs-enabled-first.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "enabled"
+expected_result = "parse"
+
+[[case]]
+name = "utf8-bom-crlf-enabled"
+path = "utf8-bom-crlf-enabled.hex"
+storage = "hex"
+encoding = "utf-8-bom"
+line_ending = "crlf"
+declared_state = "enabled"
+expected_result = "parse"
+
+[[case]]
+name = "two-space-disabled-middle"
+path = "two-space-disabled-middle.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "disabled"
+expected_result = "parse"
+
+[[case]]
+name = "comments-mixed-unset"
+path = "comments-mixed-unset.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "unspecified"
+expected_result = "parse"
+
+[[case]]
+name = "empty-object"
+path = "empty-object.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "unspecified"
+expected_result = "parse"
+
+[[case]]
+name = "truncated"
+path = "truncated.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "unknown"
+expected_result = "reject"
+
+[[case]]
+name = "duplicate-target"
+path = "duplicate-target.uplugin"
+storage = "text"
+encoding = "utf-8"
+line_ending = "lf"
+declared_state = "ambiguous"
+expected_result = "reject"

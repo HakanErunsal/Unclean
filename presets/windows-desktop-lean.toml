@@ -1,0 +1,50 @@
+# Use this preset for Windows-only desktop work without mobile or XR targets.
+schema = 1
+name = "Windows desktop lean"
+description = "Disables non-Windows platform and XR plugins plus niche source editor integrations. Keeps common Windows editor support."
+enable = []
+disable = [
+  # Disables Android deployment, media, permissions, messaging, and store delivery.
+  "AndroidDeviceProfileSelector",
+  "AndroidFileServer",
+  "AndroidMedia",
+  "AndroidMoviePlayer",
+  "AndroidPermission",
+  "GoogleCloudMessaging",
+  "GooglePAD",
+  "OnlineSubsystemGooglePlay",
+
+  # Disables Apple deployment, media, image, and platform services.
+  "AppleImageUtils",
+  "AppleMoviePlayer",
+  "AvfMedia",
+  "IOSDeviceProfileSelector",
+  "MacGraphicsSwitching",
+  "OnlineSubsystemIOS",
+
+  # Disables the example selector and mobile-only project helpers.
+  "ExampleDeviceProfileSelector",
+  "LocationServicesBPLibrary",
+  "MobileLauncherProfileWizard",
+  "MobilePatchingUtils",
+
+  # Keeps common Windows editor integrations and disables the listed alternatives.
+  "CLionSourceCodeAccess",
+  "CodeLiteSourceCodeAccess",
+  "KDevelopSourceCodeAccess",
+  "N10XSourceCodeAccess",
+  "NullSourceCodeAccess",
+  "XCodeSourceCodeAccess",
+
+  # Keeps XR disabled even if an engine version changes a plugin default.
+  "OpenXR",
+  "OpenXREyeTracker",
+  "OpenXRHandTracking",
+  "OpenXRMsftHandInteraction",
+  "OpenXRViveTracker",
+  "XRBase",
+  "XRScribe",
+  "XRVisualization",
+]
+clear = []
+disable_matching = []

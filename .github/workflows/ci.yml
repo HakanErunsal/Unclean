@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  public-text:
+    name: Public text
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check repository foundation
+        run: node scripts/check-foundation.mjs
+      - name: Check public text
+        run: node scripts/check-public-text.mjs
+
+  core-linux:
+    name: Core on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Lint shared core
+        run: cargo clippy --locked -p unclean-core --all-targets -- -D warnings
+      - name: Test shared core
+        run: cargo test --locked -p unclean-core
+
+  windows:
+    name: Windows workspace
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check formatting
+        run: cargo fmt --all --check
+      - name: Lint workspace
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Test workspace
+        run: cargo test --workspace --locked
+      - name: Build release executables
+        run: cargo build --workspace --release --locked
+      - name: Test PowerShell automation contract
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File tests\automation\powershell-contract.ps1 -BinaryPath target\release\unclean.exe
+      - name: Test Command Prompt automation contract
+        run: cmd /d /c tests\automation\cmd-contract.cmd target\release\unclean.exe
+      - name: Check API documentation
+        env:
+          RUSTDOCFLAGS: -D warnings
+        run: cargo doc --workspace --no-deps --locked
+
+  minimum-rust:
+    name: Minimum Rust 1.92
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install minimum Rust
+        run: rustup toolchain install 1.92.0 --profile minimal
+      - name: Check workspace
+        run: cargo +1.92.0 check --workspace --locked
+
+  dependencies:
+    name: Dependency policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check licenses, advisories, bans, and sources
+        uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25
+        with:
+          rust-version: "1.97.1"
+          command: check
+          arguments: --all-features

@@ -1,0 +1,8 @@
+# Pair this preset with project suppression to leave engine descriptors unchanged.
+schema = 1
+name = "Project first"
+description = "Use project suppression and explicit project overrides before changing engine defaults."
+enable = []
+disable = []
+clear = []
+disable_matching = []

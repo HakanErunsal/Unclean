@@ -1,0 +1,8 @@
+# Builds a no-change engine plan so each plugin decision starts from reviewed state.
+schema = 1
+name = "Review first"
+description = "Inspect current plugin and dependency state before adding engine-wide rules."
+enable = []
+disable = []
+clear = []
+disable_matching = []

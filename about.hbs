@@ -1,0 +1,15 @@
+Third-party license notices for Unclean
+
+This file lists the license terms selected for dependencies in the Windows release build.
+
+{{#each licenses}}
+================================================================================
+{{name}} ({{id}})
+
+Used by:
+{{#each used_by}}
+* {{crate.name}} {{crate.version}}
+{{/each}}
+
+{{text}}
+{{/each}}

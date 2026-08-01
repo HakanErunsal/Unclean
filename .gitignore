@@ -1,0 +1,18 @@
+# Rust
+/target/
+/dist/
+**/*.rs.bk
+*.pdb
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editors
+.vs/
+.vscode/
+.idea/
+
+# Private project material
+.local-fixtures/
+/resources/

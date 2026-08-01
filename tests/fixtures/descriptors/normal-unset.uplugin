@@ -1,0 +1,19 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "Invented Core",
+  "Description": "Synthetic descriptor with an absent default state.",
+  "Category": "Testing",
+  "Modules": [
+    {
+      "Name": "InventedCore",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "SyntheticUnknown": {
+    "Keep": "unchanged",
+    "Nested": [1, 2, 3]
+  }
+}
