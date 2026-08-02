@@ -33,6 +33,7 @@ const requiredPaths = [
   "LICENSE-APACHE",
   "LICENSE-MIT",
   "README.md",
+  "RELEASE_NOTES.md",
   "CONTRIBUTING.md",
   "SECURITY.md",
   "PRIVACY.md",
@@ -65,6 +66,7 @@ report(
 );
 
 const releaseWorkflow = read(".github/workflows/release.yml");
+const releasePackage = read("scripts/package-release.ps1");
 report(
   /actions\/checkout@[0-9a-f]{40}/.test(releaseWorkflow) &&
     /actions\/attest@[0-9a-f]{40}/.test(releaseWorkflow) &&
@@ -79,6 +81,18 @@ report(
     /gh release create/.test(releaseWorkflow),
   "Release workflow is missing integrity or publication steps.",
   "Generate checksums, attest the SBOMs, and publish only from a tag."
+);
+report(
+  /--notes-file RELEASE_NOTES\.md/.test(releaseWorkflow) &&
+    /--prerelease/.test(releaseWorkflow) &&
+    /--draft/.test(releaseWorkflow),
+  "Release workflow does not preserve the reviewed pre-release notes.",
+  "Publish the reviewed notes from a draft pre-release."
+);
+report(
+  !/docs[\\/]/.test(releasePackage),
+  "Release package references the private docs directory.",
+  "Package tracked public files only."
 );
 
 const markdownFiles = trackedFiles()

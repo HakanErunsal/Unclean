@@ -1,6 +1,6 @@
 # Security policy
 
-Unclean has no published release. Report security flaws found in the source or build artifacts.
+Unclean is in public alpha. Report security flaws found in the source or build artifacts.
 
 ## Private reporting
 

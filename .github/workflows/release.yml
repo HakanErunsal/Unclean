@@ -102,7 +102,7 @@ jobs:
             "dist/Unclean-$env:UNCLEAN_VERSION-unclean.cdx.json" `
             "dist/Unclean-$env:UNCLEAN_VERSION-unclean-gui.cdx.json" `
             --verify-tag `
-            --generate-notes `
+            --notes-file RELEASE_NOTES.md `
             --prerelease `
             --draft `
             --title "Unclean $env:UNCLEAN_VERSION"

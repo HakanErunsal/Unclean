@@ -33,9 +33,11 @@ edit only `DisableEnginePluginsByDefault` and explicit `Plugins` entries in the 
 
 ## Release status
 
-Unclean has no published binary release. Build it from source. The repository includes
-conservative [starter presets](presets/README.md) for Windows desktop work and neutral
-review-first or project-first workflows.
+Unclean is in alpha. Download the Windows x86-64 archive from
+[GitHub Releases](https://github.com/HakanErunsal/Unclean/releases). Windows builds remain
+unsigned. Verify the published SHA-256 checksum and GitHub build provenance before running
+them. The repository includes conservative [starter presets](presets/README.md) for Windows
+desktop work and neutral review-first or project-first workflows.
 
 ## Console contract
 

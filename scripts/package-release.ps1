@@ -141,13 +141,11 @@ $packageFiles = @(
     @{ Source = $binaryPaths[0]; Destination = "unclean.exe" }
     @{ Source = $binaryPaths[1]; Destination = "unclean-gui.exe" }
     @{ Source = (Join-Path $root "README.md"); Destination = "README.md" }
+    @{ Source = (Join-Path $root "RELEASE_NOTES.md"); Destination = "RELEASE-NOTES.md" }
     @{ Source = (Join-Path $root "SECURITY.md"); Destination = "SECURITY.md" }
     @{ Source = (Join-Path $root "PRIVACY.md"); Destination = "PRIVACY.md" }
     @{ Source = (Join-Path $root "LICENSE-APACHE"); Destination = "LICENSE-APACHE" }
     @{ Source = (Join-Path $root "LICENSE-MIT"); Destination = "LICENSE-MIT" }
-    @{ Source = (Join-Path $root "docs\14-operator-guide.md"); Destination = "OPERATOR-GUIDE.md" }
-    @{ Source = (Join-Path $root "docs\15-release-policy.md"); Destination = "RELEASE-POLICY.md" }
-    @{ Source = (Join-Path $root "docs\16-code-signing-policy.md"); Destination = "CODE-SIGNING-POLICY.md" }
     @{ Source = (Join-Path $root "presets\review-first.toml"); Destination = "presets\review-first.toml" }
     @{ Source = (Join-Path $root "presets\project-first.toml"); Destination = "presets\project-first.toml" }
     @{ Source = (Join-Path $root "presets\windows-desktop-lean.toml"); Destination = "presets\windows-desktop-lean.toml" }
@@ -179,6 +177,7 @@ $manifest = [ordered]@{
     source_revision = $revision
     source_dirty = $sourceDirty
     cargo = $rustVersion
+    code_signed = $false
     executables = @("unclean.exe", "unclean-gui.exe")
 }
 $manifestJson = $manifest | ConvertTo-Json -Depth 4
@@ -195,7 +194,7 @@ try {
     try {
         $files = Get-ChildItem -LiteralPath $stagingDirectory -File -Recurse | Sort-Object FullName
         foreach ($file in $files) {
-            $relativePath = [System.IO.Path]::GetRelativePath($stagingDirectory, $file.FullName).Replace("\", "/")
+            $relativePath = $file.FullName.Substring($stagingDirectory.Length).TrimStart([char[]]@("\", "/")).Replace("\", "/")
             Add-DeterministicZipEntry $archive $file.FullName "$packageName/$relativePath"
         }
     } finally {
