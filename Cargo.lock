@@ -3281,7 +3281,7 @@ dependencies = [
 
 [[package]]
 name = "unclean-cli"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 dependencies = [
  "clap",
  "serde",
@@ -3293,7 +3293,7 @@ dependencies = [
 
 [[package]]
 name = "unclean-core"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 dependencies = [
  "globset",
  "jsonc-parser",
@@ -3309,7 +3309,7 @@ dependencies = [
 
 [[package]]
 name = "unclean-gui"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 dependencies = [
  "eframe",
  "embed-resource",

@@ -1,4 +1,4 @@
-# Unclean 0.1.0-alpha.1
+# Unclean 0.1.0-alpha.2
 
 This first public alpha supports Windows 11 x86-64. The Windows executables are unsigned.
 Verify the published SHA-256 checksum and GitHub build provenance before running them.

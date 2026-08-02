@@ -7,17 +7,33 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  id-token: write
-  attestations: write
+  contents: read
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  dependency-policy:
+    name: Dependency policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check licenses, advisories, bans, and sources
+        uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25
+        with:
+          rust-version: "1.97.1"
+          command: check
+          arguments: --all-features
+
   windows-release:
     name: Windows release
+    needs: dependency-policy
     runs-on: windows-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
     steps:
       - name: Check out source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -40,12 +56,6 @@ jobs:
         run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - name: Test workspace
         run: cargo test --workspace --locked
-      - name: Check dependencies
-        uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25
-        with:
-          rust-version: "1.97.1"
-          command: check
-          arguments: --all-features
       - name: Install release tools
         run: |
           cargo install --locked cargo-about --version 0.9.1 --features cli
